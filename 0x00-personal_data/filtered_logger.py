@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""filter_datum for hide the sen.. data"""
 from typing import List
 import re
 
