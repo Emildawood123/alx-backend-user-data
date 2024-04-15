@@ -53,7 +53,7 @@ class BasicAuth(Auth):
                 user = my_lst[0]
                 passwd = my_lst[1]
                 return user, passwd
-            
+
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """user_object_from_credentials method"""
@@ -64,7 +64,8 @@ class BasicAuth(Auth):
         if User.search({'email': user_email}) == []:
             return None
         else:
-            if User.search({'email': user_email})[-1].is_valid_password(user_pwd):
+            to_pass_pycode = User.search({'email': user_email})[-1]
+            if to_pass_pycode.is_valid_password(user_pwd):
                 return User.search({'email': user_email})[-1]
             else:
                 return None

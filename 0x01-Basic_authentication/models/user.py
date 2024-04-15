@@ -5,6 +5,7 @@ import hashlib
 from models.base import Base
 from typing import TypeVar
 
+
 class User(Base):
     """ User class
     """
