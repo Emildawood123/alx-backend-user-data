@@ -4,6 +4,8 @@ from flask import request
 from typing import List, TypeVar
 from api.v1.auth.auth import Auth
 import base64
+from models.user import User
+import hashlib
 
 
 class BasicAuth(Auth):
@@ -51,3 +53,19 @@ class BasicAuth(Auth):
                 user = my_lst[0]
                 passwd = my_lst[1]
                 return user, passwd
+            
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """user_object_from_credentials method"""
+        if user_email is None or type(user_email) != str:
+            return None
+        if user_pwd is None or type(user_pwd) != str:
+            return None
+        if User.search({'email': user_email}) == []:
+            return None
+        else:
+            pass_after_hash = hashlib.sha256(user_pwd.encode()).hexdigest().lower()
+            if User.search({'email': user_email})[-1].password == pass_after_hash:
+                return User.search({'email': user_email})[-1]
+            else:
+                return None
