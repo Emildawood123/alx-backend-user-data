@@ -64,8 +64,7 @@ class BasicAuth(Auth):
         if User.search({'email': user_email}) == []:
             return None
         else:
-            pass_after_hash = hashlib.sha256(user_pwd.encode()).hexdigest().lower()
-            if User.search({'email': user_email})[-1].password == pass_after_hash:
+            if User.search({'email': user_email})[-1].is_valid_password(user_pwd):
                 return User.search({'email': user_email})[-1]
             else:
                 return None
