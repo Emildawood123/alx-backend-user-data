@@ -69,3 +69,11 @@ class BasicAuth(Auth):
                 return User.search({'email': user_email})[-1]
             else:
                 return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """current_user method"""
+        auth = self.authorization_header(request)
+        ex_base64 = self.extract_base64_authorization_header(auth)
+        de_base64 = self.decode_base64_authorization_header(ex_base64)
+        ex_user = self.extract_user_credentials(de_base64)
+        return self.user_object_from_credentials(ex_user)
