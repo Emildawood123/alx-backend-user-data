@@ -45,6 +45,11 @@ class BasicAuth(Auth):
             return None, None
         if decoded_base64_authorization_header.find(':') == -1:
             return None, None
+        if decoded_base64_authorization_header.count(':') > 1:
+            ind = decoded_base64_authorization_header.rfind(':')
+            user = decoded_base64_authorization_header[:ind]
+            passwd = decoded_base64_authorization_header[ind + 1:]
+            return user, passwd
         else:
             if len(decoded_base64_authorization_header) == 1:
                 return '', ''
