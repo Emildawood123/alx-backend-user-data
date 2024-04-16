@@ -14,10 +14,10 @@ class Auth():
             if path[-1] != '/':
                 path += '/'
             for ex_path in excluded_paths:
-                if ex_path[-2] == '*':
-                    if ex_path[:-2] in path:
+                if ex_path[-1] == '*':
+                    if ex_path[:-1] in path:
                         return False
-                elif ex_path[-2] != '*':
+                elif ex_path[-1] != '*':
                     if ex_path == path:
                         return False
             return True
