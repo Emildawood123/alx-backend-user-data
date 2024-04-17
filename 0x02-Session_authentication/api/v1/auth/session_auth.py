@@ -11,7 +11,11 @@ import uuid
 
 class SessionAuth(Auth):
     """SessionAuth class"""
+
+
     user_id_by_session_id = {}
+
+
     def create_session(self, user_id: str = None) -> str:
         """create_session method"""
         if user_id is None or type(user_id) != str:
