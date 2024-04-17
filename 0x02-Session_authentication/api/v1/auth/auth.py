@@ -2,7 +2,7 @@
 """auth moudle"""
 from flask import request as re
 from typing import List, TypeVar
-import getenv
+from os import getenv
 
 
 class Auth():
