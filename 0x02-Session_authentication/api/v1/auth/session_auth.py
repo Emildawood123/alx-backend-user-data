@@ -24,13 +24,8 @@ class SessionAuth(Auth):
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
         """user_is_for_session_id method"""
-        if session_id is None or type(session_id) is not str:
-            return None
-        else:
-            try:
-                return self.user_id_by_session_id.get(session_id)
-            except Exception:
-                return None
+        if bool(isinstance(session_id, str)):
+            return self.user_id_by_session_id.get(session_id)
 
     def current_user(self, request=None):
         """current_user overload method"""
