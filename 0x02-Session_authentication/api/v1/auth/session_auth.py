@@ -28,6 +28,8 @@ class SessionAuth(Auth):
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
         """user_is_for_session_id method"""
+        if session_id is None:
+            return None
         try:
             return self.user_id_by_session_id.get(session_id)
         except Exception:
@@ -36,5 +38,4 @@ class SessionAuth(Auth):
     def current_user(self, request=None):
         """current_user overload method"""
         user_id = self.user_id_for_session_id(self.session_cookie(request))
-        user = User()
-        return user.get(user_id)
+        return User.get(user_id)
