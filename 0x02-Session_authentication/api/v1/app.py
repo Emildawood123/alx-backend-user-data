@@ -56,8 +56,10 @@ def before_request() -> None:
     request.current_user = res
     my_lst = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/',
               '/api/v1/auth_session/login/']
-    if auth.authorization_header(request) and auth.session_cookie(request):
-        return None, abort(401)
+    is_require = auth.require_auth(request.path, my_lst)
+    if is_require:
+        if auth.authorization_header(request) and auth.session_cookie(request):
+            return None, abort(401)
     if auth is None:
         return None
     if auth.require_auth(request.path, my_lst) is False:
