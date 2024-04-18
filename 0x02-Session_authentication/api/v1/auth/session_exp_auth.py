@@ -13,9 +13,9 @@ from datetime import timedelta, datetime
 class SessionExpAuth(SessionAuth):
     """SessionExpAuth class"""
     def __init__(self):
-        try:
-            self.session_duration = getenv('SESSION_DURATION')
-        except Exception:
+        self.session_duration:
+            self.session_duration = int(getenv('SESSION_DURATION'))
+        else:
             self.session_duration = 0
 
     def create_session(self, user_id=None):
