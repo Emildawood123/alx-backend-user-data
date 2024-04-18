@@ -27,7 +27,10 @@ class SessionAuth(Auth):
         if session_id is None or type(session_id) is not str:
             return None
         else:
-            return self.user_id_by_session_id.get(session_id)
+            try:
+                return self.user_id_by_session_id.get(session_id)
+            except Exception:
+                return None
 
     def current_user(self, request=None):
         """current_user overload method"""
