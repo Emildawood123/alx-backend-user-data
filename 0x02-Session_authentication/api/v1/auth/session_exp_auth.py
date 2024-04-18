@@ -9,6 +9,7 @@ import hashlib
 from os import getenv
 from datetime import timedelta, datetime
 
+
 class SessionExpAuth(SessionAuth):
     """SessionExpAuth class"""
     def __init__(self):

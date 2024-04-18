@@ -15,7 +15,7 @@ class BasicAuth(Auth):
         """extract_base64_authorization_header method"""
         if authorization_header is None:
             return None
-        if type(authorization_header) != str:
+        if type(authorization_header) is not str:
             return None
         if len(authorization_header) > 6:
             if authorization_header[:6] == 'Basic ':
@@ -28,7 +28,7 @@ class BasicAuth(Auth):
         """decode_base64_authorization_header method"""
         if base64_authorization_header is None:
             return None
-        if type(base64_authorization_header) != str:
+        if type(base64_authorization_header) is not str:
             return None
         try:
             r = base64.b64decode(base64_authorization_header)
@@ -41,7 +41,7 @@ class BasicAuth(Auth):
         """extract_user_credentials method"""
         if decoded_base64_authorization_header is None:
             return None, None
-        if type(decoded_base64_authorization_header) != str:
+        if type(decoded_base64_authorization_header) is not str:
             return None, None
         if decoded_base64_authorization_header.find(':') == -1:
             return None, None
@@ -62,9 +62,9 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """user_object_from_credentials method"""
-        if user_email is None or type(user_email) != str:
+        if user_email is None or type(user_email) is not str:
             return None
-        if user_pwd is None or type(user_pwd) != str:
+        if user_pwd is None or type(user_pwd) is not str:
             return None
         if User.search({'email': user_email}) == []:
             return None
