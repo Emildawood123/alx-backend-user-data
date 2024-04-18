@@ -14,7 +14,10 @@ class SessionExpAuth(SessionAuth):
     """SessionExpAuth class"""
     def __init__(self):
         if getenv('SESSION_DURATION'):
-            self.session_duration = int(getenv('SESSION_DURATION'))
+            try:
+                self.session_duration = int(getenv('SESSION_DURATION'))
+            except Exception:
+                self.session_auth = 0
         else:
             self.session_duration = 0
 
@@ -36,7 +39,7 @@ class SessionExpAuth(SessionAuth):
         if session_id is None:
             return None
         session_dictionary = self.user_id_by_session_id[session_id]
-        if session_id not in self.user_id_by_session_id :
+        if session_id not in self.user_id_by_session_id:
             return None
         if self.session_duration <= 0:
             return session_dictionary['user_id']
