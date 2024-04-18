@@ -20,14 +20,12 @@ class SessionExpAuth(SessionAuth):
 
     def create_session(self, user_id=None):
         """create_session method"""
-        try:
-            session_id = super().create_session(user_id)
-            if session_id is None:
-                return None
+        session_id = super().create_session(user_id)
+        if session_auth:
             self.user_id_by_session_id[session_id]['user_id'] = user_id
             self.user_id_by_session_id[session_id] = datetime.now()
             return session_id
-        except Exception:
+        else:
             return None
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
