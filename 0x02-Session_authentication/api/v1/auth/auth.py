@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """auth moudle"""
-from flask import request as re
+from flask import request
 from typing import List, TypeVar
 from os import getenv
 
@@ -39,5 +39,4 @@ class Auth():
         if request is None:
             return None
         else:
-            my_session_id = getenv('SESSION_NAME')
-            return request.cookies.get(my_session_id)
+            return request.cookies.get(getenv('SESSION_NAME'))
