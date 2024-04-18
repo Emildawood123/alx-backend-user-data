@@ -32,10 +32,10 @@ class SessionAuth(Auth):
             return None
         if bool(isinstance(session_id, str)):
             try:
-                result = self.user_id_by_session_id
+                result = str(self.user_id_by_session_id.get(session_id))
                 return result
             except Exception:
-                return self.user_id_by_session_id
+                return None
         else:
             return None
 
