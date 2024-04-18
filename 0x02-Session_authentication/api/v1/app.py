@@ -58,7 +58,7 @@ def before_request() -> None:
               '/api/v1/auth_session/login/']
     auth_au = auth.authorization_header(request)
     auth_se = uth.session_cookie(request)
-    if auth_su is None and auth_se is None:
+    if auth_su and auth_se:
         return None, abort(401)
     if auth is None:
         return
