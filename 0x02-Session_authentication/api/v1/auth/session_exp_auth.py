@@ -13,7 +13,7 @@ from datetime import timedelta, datetime
 class SessionExpAuth(SessionAuth):
     """SessionExpAuth class"""
     def __init__(self):
-        self.session_duration:
+        if getenv('SESSION_DURATION'):
             self.session_duration = int(getenv('SESSION_DURATION'))
         else:
             self.session_duration = 0
