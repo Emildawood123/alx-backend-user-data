@@ -59,7 +59,7 @@ def before_request() -> None:
     auth_au = auth.authorization_header(request)
     auth_se = uth.session_cookie(request)
     if auth_su and auth_se:
-        return None, abort(401)
+        abort(401)
     if auth is None:
         return
     if auth.require_auth(request.path, my_lst) is False:
