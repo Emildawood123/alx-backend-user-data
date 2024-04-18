@@ -11,7 +11,11 @@ import uuid
 
 class SessionAuth(Auth):
     """SessionAuth class"""
-    user_id_by_session_id = {}
+    user_id_by_session_id = dict()
+
+    def __init__(self) -> None:
+        """init for cls"""
+        super().__init__()
 
     def create_session(self, user_id: str = None) -> str:
         """create_session method"""
@@ -27,7 +31,11 @@ class SessionAuth(Auth):
         if session_id is None:
             return None
         if bool(isinstance(session_id, str)):
-            return self.user_id_by_session_id.get(session_id)
+            try:
+                result = self.user_id_by_session_id
+                return result
+            except Exception:
+                return self.user_id_by_session_id
         else:
             return None
 
