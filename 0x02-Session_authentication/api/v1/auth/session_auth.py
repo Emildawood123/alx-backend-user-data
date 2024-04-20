@@ -11,11 +11,7 @@ import uuid
 
 class SessionAuth(Auth):
     """SessionAuth class"""
-    user_id_by_session_id = dict()
-
-    def __init__(self) -> None:
-        """init for cls"""
-        super().__init__()
+    user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
         """create_session method"""
@@ -37,6 +33,6 @@ class SessionAuth(Auth):
 
     def current_user(self, request=None):
         """current_user overload method"""
-        user_id = self.user_id_for_session_id(self.session_cookie(request))
-        print(user_id)
+        cookie = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(cookie)
         return User.get(user_id)
