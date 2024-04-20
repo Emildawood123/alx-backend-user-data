@@ -32,8 +32,21 @@ class SessionAuth(Auth):
         except Exception:
             return None
 
-    def current_user(self, request=None):
+    def current_user(self, request=None) -> TypeVar('User'):
         """current_user overload method"""
         cookie = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(cookie)
+        user_id = self.user_id_for_session_id(str(cookie))
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        """"destroy_session"""
+        if request is None:
+            return False
+        get_cookie = self.session_cookie(request)
+        if get_cookie is None:
+            return False
+        if self.user_id_for_session_id(get_cookie) is None:
+            return False
+        else:
+            del user_id_by_session_id[get_cookie]
+            return True

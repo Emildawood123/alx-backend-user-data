@@ -9,7 +9,7 @@ from os import getenv
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-def session_route() -> str:
+def session_route():
     """session_route method"""
     try:
         email = request.form.get('email')
@@ -31,7 +31,18 @@ def session_route() -> str:
             return jsonify({"error": "wrong password"}), 401
         else:
             from api.v1.app import auth
-            session_id = auth.create_session(get_user[-1].id)
-            res = jsonify(get_user[-1].to_json())
-            res.set_cookie(getenv("SESSION_NAME"), session_id)
+            session_id = auth.create_session(get_user[0].id)
+            res = jsonify(get_user[0].to_json())
+            res.set_cookie(getenv("SESSION_NAME"), str(session_id))
             return res
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def del_session_route() -> str:
+    """del_session_route"""
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    else:
+        return False, abort(404)
