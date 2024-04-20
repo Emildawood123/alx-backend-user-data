@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Module of Index views
+""" Module of Sessoin_auth views
 """
 from flask import jsonify, abort, request
 from api.v1.views import app_views
@@ -10,6 +10,7 @@ from os import getenv
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
 def session_route() -> str:
+    """session_route method"""
     try:
         email = request.form.get('email')
         if email == '' or email is None:
@@ -31,6 +32,6 @@ def session_route() -> str:
         else:
             from api.v1.app import auth
             session_id = auth.create_session(get_user[-1].id)
-            res = jsonify(get_user[-1]).to_json()
-            res.set_cookie(getenv('SESSION_NAME'), session_id)
+            res = jsonify(get_user[-1].to_json())
+            res.set_cookie(getenv("SESSION_NAME"), session_id)
             return res
