@@ -33,4 +33,4 @@ def session_route() -> str:
             session_id = auth.create_session(get_user[-1].id)
             res = jsonify(get_user[-1]).to_json()
             res.set_cookie(getenv('SESSION_NAME', session_id))
-            return jsonify(get_user[-1]).to_json()
+            return res
