@@ -4,6 +4,7 @@
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 from models.user import User
+from os import getenv
 
 
 @app_views.route('/auth_session/login', methods=['POST'],
@@ -29,4 +30,7 @@ def session_route() -> str:
             return jsonify({"error": "wrong password"}), 401
         else:
             from api.v1.app import auth
-            return (get_user[-1]).to_json()
+            session_id = auth.create_session(get_user[-1].id)
+            res = jsonify(get_user[-1]).to_json()
+            res.set_cookie(getenv('SESSION_NAME', session_id))
+            return jsonify(get_user[-1]).to_json()
