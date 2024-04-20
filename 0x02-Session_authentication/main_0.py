@@ -28,7 +28,7 @@ def root_path():
     """
     request_user = sa.current_user(request)
     if request_user is None:
-        return "No user found\n {}".format(request_user)
+        return "No user found\n"
     return "User found: {}\n".format(request_user.id)
 
 if __name__ == "__main__":
