@@ -8,7 +8,7 @@ from user import User
 
 
 def _hash_password(password: str) -> bytes:
-    """Returns hashpassword by password."""
+    """Returned bytes is a salted hash of the input password."""
     aft_hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     return aft_hashed
 
