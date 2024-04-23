@@ -22,6 +22,7 @@ class Auth:
     """
 
     def __init__(self):
+        """__init__ consturctor"""
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> bytes:
