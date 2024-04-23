@@ -36,8 +36,8 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """add_user for add user in db method"""
         new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
-        self._session.commit()
+        DB._session.add(new_user)
+        DB._session.commit()
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
