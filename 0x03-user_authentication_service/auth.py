@@ -67,7 +67,7 @@ class Auth:
         """destroy_session method that destory user and Return None."""
         try:
             user = self._db.find_user_by(id=user_id)
-            user.session_id = None
+            setattr(user, session_id, None)
             return None
         except NoResultFound:
             return None
