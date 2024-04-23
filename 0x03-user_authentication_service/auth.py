@@ -64,7 +64,7 @@ class Auth:
             return None
 
     def destroy_session(user_id: int) -> None:
-        """destroy_session method that destory user and return none."""
+        """destroy_session method that destory user and Return None."""
         try:
             user = self._db.find_user_by(id=user_id)
             user.session_id = None
