@@ -8,13 +8,12 @@ from user import User
 
 
 def _hash_password(password: str) -> bytes:
-    """Returned bytes is a salted hash of the input password."""
-    aft_hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    return aft_hashed
+    """Returns a salted hash of the input password."""
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
-    """_generate_uuid method"""
+    """Returns a string representation of a new UUID."""
     return str(uuid.uuid4())
 
 
