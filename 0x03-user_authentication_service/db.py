@@ -54,11 +54,16 @@ class DB:
 
     def update_user(self, user_id, **kwargs) -> None:
         """update_user method"""
+        if not kwargs:
+            raise ValueError
         lst = ["id", 'email', 'hashed_password', 'session_id', 'reset_token']
         for k, v in kwargs.items():
             if k not in lst:
                 raise ValueError
-        user_selected = self.find_user_by(id=user_id)
+        try:
+            user_selected = self.find_user_by(id=user_id)
+        except NoResultFound:
+            raise ValueError
         for k, v in kwargs.items():
             setattr(user_selected, k, v)
         self._session.commit()
