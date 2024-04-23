@@ -9,7 +9,8 @@ from user import User
 
 def _hash_password(password: str) -> bytes:
     """_hash_password method"""
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    aft_hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return aft_hashed
 
 
 def _generate_uuid() -> str:
