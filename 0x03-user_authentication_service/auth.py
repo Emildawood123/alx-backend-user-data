@@ -8,7 +8,7 @@ import uuid
 
 
 def _hash_password(password: str) -> bytes:
-    """_hash_password method"""
+    """_hash_password method that return bytes"""
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
 
