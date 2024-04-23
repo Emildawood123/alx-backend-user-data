@@ -32,7 +32,7 @@ class Auth:
         except NoResultFound:
             return self._db.add_user(email, _hash_password(password))
 
-    def valid_login(self, email, password) -> bool:
+    def valid_login(self, email: str, password: str) -> bool:
         """valid_login"""
         try:
             user = self._db.find_user_by(email=email)
@@ -43,7 +43,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email) -> str:
+    def create_session(self, email: str) -> str:
         """create_session"""
         try:
             user = self._db.find_user_by(email=email)
@@ -63,7 +63,7 @@ class Auth:
             return None
 
     def destroy_session(user_id: int) -> None:
-        """destroy_session"""
+        """destroy_session method"""
         try:
             user = self._db.find_user_by(id=user_id)
             user.session_id = None
