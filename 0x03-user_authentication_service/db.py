@@ -39,3 +39,26 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        """find_user_by method"""
+        lst = ["id", 'email', 'hashed_password', 'session_id', 'reset_token']
+        for k, v in kwargs.items():
+            if k not in lst:
+                raise InvalidRequestError()
+        find_user = self._session.query(User).filter_by(**kwargs).first()
+        if find_user:
+            return find_user
+        else:
+            raise NoResultFound()
+
+    def update_user(self, user_id, **kwargs) -> None:
+        """update_user method"""
+        lst = ["id", 'email', 'hashed_password', 'session_id', 'reset_token']
+        for k, v in kwargs.items():
+            if k not in lst:
+                raise ValueError
+        user_selected = self.find_user_by(id=user_id)
+        for k, v in kwargs.items():
+            setattr(user_selected, k, v)
+        self._session.commit()
