@@ -14,6 +14,7 @@ def _hash_password(password: str) -> bytes:
 
 
 def _generate_uuid() -> str:
+    """_generate_uuid method"""
     return str(uuid.uuid4())
 
 
