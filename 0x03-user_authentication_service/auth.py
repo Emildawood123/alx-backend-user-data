@@ -2,8 +2,8 @@
 """Auth model"""
 import bcrypt
 from db import DB
-from user import User
 from sqlalchemy.orm.exc import NoResultFound
+from user import User
 import uuid
 
 
